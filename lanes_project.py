@@ -228,7 +228,7 @@ def vid_pipeline(img):
         img[y_offset:y_offset+curves_image.shape[0], x_offset:x_offset+curves_image.shape[1]] = curves_image
     return img
 
-debugging_mode=int(input('1 for debugging mode , 0 for normal mode'))
+debugging_mode=int(sys.argv[1])
 videos_list=os.listdir(os.getcwd()+'/test_videos')
 for filename in videos_list:
     if filename.endswith(".mp4"):
