@@ -228,11 +228,13 @@ def vid_pipeline(img):
         img[y_offset:y_offset+curves_image.shape[0], x_offset:x_offset+curves_image.shape[1]] = curves_image
     return img
 
-debugging_mode=int(sys.argv[1])
-videos_list=os.listdir(os.getcwd()+'/test_videos')
+input_directory=sys.argv[1]
+videos_list=os.listdir(input_directory)
+outputdirectory=sys.argv[2]
+debugging_mode=int(sys.argv[3])
 for filename in videos_list:
     if filename.endswith(".mp4"):
-        myclip=VideoFileClip(os.getcwd()+'/test_videos/'+str(filename)) 
+        myclip=VideoFileClip(input_directory+str(filename)) 
         output_vid = myclip.filename[:-4]+'_output.mp4'
         clip = myclip.fl_image(vid_pipeline)
-        clip.write_videofile(output_vid, audio=False)
+        clip.write_videofile(outputdirectory+filename, audio=False)
