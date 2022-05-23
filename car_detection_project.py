@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # coding: utf-8
 
 # In[ ]:
@@ -11,6 +11,7 @@ import cv2
 import glob
 import time
 import random
+import sys
 
 # import hog feature extractor and data normalization method
 from skimage.feature import hog
@@ -20,9 +21,6 @@ from sklearn.svm import LinearSVC
 from sklearn.model_selection import train_test_split
 from scipy.ndimage.measurements import label
 from moviepy.editor import VideoFileClip
-from IPython.display import HTML
-get_ipython().run_line_magic('matplotlib', 'inline')
-
 
 # ### Load Training Data
 
@@ -575,11 +573,13 @@ def process_frame_for_video(img):
 
 
 det = Vehicle_Detect()
-
-proj_out_file = 'yarab.mp4'
-clip_proj = VideoFileClip('project_video_50s.mp4') 
+# PATH OF THE OUTPUT DIRECTORY
+proj_out_file = sys.argv[2] + '/car_detection_out_video.mp4'
+# PATH OF THE INPUT VIDEO
+clip_proj = VideoFileClip(sys.argv[1]) 
 clip_proj_out = clip_proj.fl_image(process_frame_for_video)
-get_ipython().run_line_magic('time', 'clip_proj_out.write_videofile(proj_out_file, audio=False)')
+clip_proj_out.write_videofile(proj_out_file, audio=False)
+
 
 
 # In[ ]:
